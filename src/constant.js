@@ -1,4 +1,4 @@
-export const GET_USER_REQUESTED = "requested";
-export const GET_USER_SUCCEED = "succeed";
-export const GET_USER_FAILED = "failed";
+export const GET_USER_REQUESTED = "GET_USER_REQUESTED";
+export const GET_USER_SUCCEED = "GET_USER_SUCCEED";
+export const GET_USER_FAILED = "GET_USER_FAILED";
 

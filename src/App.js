@@ -1,20 +1,12 @@
 import { connect } from "react-redux";
 import logo from "./logo.svg";
 import "./App.css";
-import * as services from "./services";
-import * as actions from "./store/action";
+import { fetchUsers } from "./store/thunk";
 import { useEffect } from "react";
-import update from 'immutability-helper';
+import update from "immutability-helper";
 
 function App(props) {
-  const {
-    getUsersRequested,
-    getUsersSucceed,
-    getUsersFailed,
-    error,
-    loading,
-    user,
-  } = props;
+  const { fetchUsers, error, loading, user } = props;
 
   const initialArray = [1, 2, 3];
   const newArray = update(initialArray, { $push: [4] });
@@ -26,7 +18,9 @@ function App(props) {
   console.log("=========change array=========");
 
   const collection = [1, 2, { a: [12, 17, 15] }];
-  const newCollection = update(collection, { 2: { a: { $splice: [[1, 1, 13, 14]] } } });
+  const newCollection = update(collection, {
+    2: { a: { $splice: [[1, 1, 13, 14]] } },
+  });
   console.log("=========Nested collections=========");
   console.log({
     newCollection,
@@ -34,8 +28,14 @@ function App(props) {
   });
   console.log("=========Nested collections=========");
 
-  const obj = { a:5, b: 3 };
-  const newObj = update(obj, { b: { $apply: (x) => { return x * 2; } } });
+  const obj = { a: 5, b: 3 };
+  const newObj = update(obj, {
+    b: {
+      $apply: (x) => {
+        return x * 2;
+      },
+    },
+  });
   const newObj2 = update(obj, { b: { $set: obj.b * 2 } });
 
   console.log("=========obj newObj newObj2=========");
@@ -50,19 +50,22 @@ function App(props) {
   const desiredState = {
     foo: [
       {
-        bar: ['x', 'y', 'z']
-      }
-    ]
+        bar: ["x", "y", "z"],
+      },
+    ],
   };
 
   const mutateState = update(originState, {
-    foo: foo => update(foo || [], {
-      0: fooZero => update(fooZero || {}, {
-        bar: bar => update(bar || [], {
-          $push: ["x", "y", "z"]
-        })
-      })
-    })
+    foo: (foo) =>
+      update(foo || [], {
+        0: (fooZero) =>
+          update(fooZero || {}, {
+            bar: (bar) =>
+              update(bar || [], {
+                $push: ["x", "y", "z"],
+              }),
+          }),
+      }),
   });
 
   console.log("=========originState desiredState mutateState=========");
@@ -71,18 +74,12 @@ function App(props) {
     mutateState,
     TestBoolean: JSON.stringify(desiredState) === JSON.stringify(mutateState),
     originState,
-  })
+  });
   console.log("=========originState desiredState mutateState=========");
 
   useEffect(async () => {
-    getUsersRequested();
-    try {
-      const dbUser = await services.fetchUsers();
-      getUsersSucceed(dbUser);
-    } catch (error) {
-      getUsersFailed(error);
-    }
-  }, [getUsersRequested, getUsersSucceed, getUsersFailed]);
+    const res = await fetchUsers();
+  }, [fetchUsers]);
 
   if (loading) {
     return (
@@ -125,9 +122,7 @@ const mapState = (state) => {
 };
 
 const mapDispatch = {
-  getUsersRequested: actions.getUsersRequested,
-  getUsersSucceed: actions.getUsersSucceed,
-  getUsersFailed: actions.getUsersFailed,
+  fetchUsers,
 };
 
 export default connect(mapState, mapDispatch)(App);
