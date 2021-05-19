@@ -1,85 +1,15 @@
 import { connect } from "react-redux";
 import logo from "./logo.svg";
 import "./App.css";
-import { fetchUsers } from "./store/thunk";
 import { useEffect } from "react";
-import update from "immutability-helper";
+import * as actions from "./store/action";
 
 function App(props) {
-  const { fetchUsers, error, loading, user } = props;
+  const { getUsersRequested, error, loading, user } = props;
 
-  const initialArray = [1, 2, 3];
-  const newArray = update(initialArray, { $push: [4] });
-  console.log("=========change array=========");
-  console.log({
-    newArray,
-    initialArray,
-  });
-  console.log("=========change array=========");
-
-  const collection = [1, 2, { a: [12, 17, 15] }];
-  const newCollection = update(collection, {
-    2: { a: { $splice: [[1, 1, 13, 14]] } },
-  });
-  console.log("=========Nested collections=========");
-  console.log({
-    newCollection,
-    collection,
-  });
-  console.log("=========Nested collections=========");
-
-  const obj = { a: 5, b: 3 };
-  const newObj = update(obj, {
-    b: {
-      $apply: (x) => {
-        return x * 2;
-      },
-    },
-  });
-  const newObj2 = update(obj, { b: { $set: obj.b * 2 } });
-
-  console.log("=========obj newObj newObj2=========");
-  console.log({
-    newObj,
-    newObj2,
-    obj,
-  });
-  console.log("=========obj newObj newObj2=========");
-
-  const originState = {};
-  const desiredState = {
-    foo: [
-      {
-        bar: ["x", "y", "z"],
-      },
-    ],
-  };
-
-  const mutateState = update(originState, {
-    foo: (foo) =>
-      update(foo || [], {
-        0: (fooZero) =>
-          update(fooZero || {}, {
-            bar: (bar) =>
-              update(bar || [], {
-                $push: ["x", "y", "z"],
-              }),
-          }),
-      }),
-  });
-
-  console.log("=========originState desiredState mutateState=========");
-  console.log({
-    desiredState,
-    mutateState,
-    TestBoolean: JSON.stringify(desiredState) === JSON.stringify(mutateState),
-    originState,
-  });
-  console.log("=========originState desiredState mutateState=========");
-
-  useEffect(async () => {
-    const res = await fetchUsers();
-  }, [fetchUsers]);
+  useEffect(() => {
+    getUsersRequested();
+  }, [getUsersRequested]);
 
   if (loading) {
     return (
@@ -122,7 +52,7 @@ const mapState = (state) => {
 };
 
 const mapDispatch = {
-  fetchUsers,
+  getUsersRequested: actions.getUsersRequested,
 };
 
 export default connect(mapState, mapDispatch)(App);
