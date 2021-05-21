@@ -1,4 +1,4 @@
-import * as types from "../constant";
+import * as types from "../../constant";
 
 export const getUsersRequested = () => {
   return {
@@ -6,11 +6,11 @@ export const getUsersRequested = () => {
   };
 };
 
-export const getUsersSucceed = (user) => {
+export const getUsersSucceed = (info) => {
   return {
     type: types.GET_USER_SUCCEED,
     payload: {
-      user,
+      info,
     },
   };
 };

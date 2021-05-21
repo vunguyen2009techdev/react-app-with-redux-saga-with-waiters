@@ -9062,7 +9062,7 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
-react-redux@^7.2.4:
+react-redux@^7.2.2, react-redux@^7.2.4:
   version "7.2.4"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.4.tgz#1ebb474032b72d806de2e0519cd07761e222e225"
   integrity sha512-hOQ5eOSkEJEXdpIKbnRyl04LhaWabkDPV+Ix97wqQX3T3d2NQ8DUblNXXtNMavc7DpswyQM6xfaN4HQDKNY2JA==
@@ -9242,12 +9242,32 @@ redent@^3.0.0:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
 
+redux-act@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/redux-act/-/redux-act-1.8.0.tgz#5394a9433b36937d1a1da11aca6547d97d10ab00"
+  integrity sha512-xW3FIco/VwJGMW3eCD3JGAxyozNC4k35qrWM5lEQf9T2pfv3leDC+3vQ8WdHZjcrol/jjWAeJ+ULqrscuDqlKg==
+
 redux-saga@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.1.3.tgz#9f3e6aebd3c994bbc0f6901a625f9a42b51d1112"
   integrity sha512-RkSn/z0mwaSa5/xH/hQLo8gNf4tlvT18qXDNvedihLcfzh+jMchDgaariQoehCpgRltEm4zHKJyINEz6aqswTw==
   dependencies:
     "@redux-saga/core" "^1.1.3"
+
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
+
+redux-waiters@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/redux-waiters/-/redux-waiters-1.0.11.tgz#14ce72308acdaeaf3f94815c18a2f3b860c96d97"
+  integrity sha512-UP//D4yQihEPQ2zI7ffCOukltlu9kvUxC7h5x2ZZ/wmBjmKPswpD+YKuKNRsiMLTAnE/zWGE5pouAXjR3aHc9w==
+  dependencies:
+    react-redux "^7.2.2"
+    redux-act "^1.8.0"
+    redux-saga "^1.1.3"
+    reselect "^4.0.0"
 
 redux@^4.0.0, redux@^4.0.4, redux@^4.1.0:
   version "4.1.0"
@@ -9427,6 +9447,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+reselect@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
+  integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"

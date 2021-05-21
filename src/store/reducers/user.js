@@ -1,32 +1,34 @@
-import * as types from "../constant";
+import * as types from "../../constant";
 
 const initialState = {
   loading: false,
+  info: null,
   error: null,
-  user: null,
 };
 
-export const rootReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_USER_REQUESTED:
       return {
         loading: true,
-        user: null,
+        info: null,
         error: null,
       };
     case types.GET_USER_SUCCEED:
       return {
         loading: false,
-        user: action?.payload?.user,
+        info: action?.payload?.info,
         error: null,
       };
     case types.GET_USER_FAILED:
       return {
         loading: false,
-        user: null,
+        info: null,
         error: action?.payload?.error,
       };
     default:
       return state;
   }
 };
+
+export default userReducer;
